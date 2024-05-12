@@ -1,0 +1,21 @@
+version = 1
+
+[install]
+ollama.pkg-path = "ollama"
+python.pkg-path = "python311"
+watch.pkg-path = "watch"
+curl.pkg-path = "curl"
+
+[vars]
+message = "howdy"
+
+[services.server]
+command = "python3 -m http.server 8000"
+priority = 1
+
+[services.order_checker]
+command = "watch -n 1 curl -X GET localhost:8000/foo.json"
+priority = 2
+
+[services.ollama]
+command = "ollama serve"
